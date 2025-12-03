@@ -1,0 +1,39 @@
+Month = MONTH('WASDE Daily'[Date]) 
+
+Month Average US ES 5Y = 
+CALCULATE (
+    AVERAGE ( 'WASDE Daily'[US Ending Stocks] ),
+    FILTER (
+        ALL ( 'WASDE Daily'),
+        'WASDE Daily'[Month] = EARLIER ( 'WASDE Daily'[Month] ) &&
+        YEAR ( 'WASDE Daily'[Date] ) >= YEAR ( EARLIER ( 'WASDE Daily'[Date] ) ) - 4 &&
+        YEAR ( 'WASDE Daily'[Date] ) <= YEAR ( EARLIER ( 'WASDE Daily'[Date]) )
+    ),
+    ALLEXCEPT ( 'WASDE Daily','WASDE Daily'[Month] )
+)
+
+Month St Dev US ES 5Y = 
+CALCULATE (
+    STDEV.S( 'WASDE Daily'[US Ending Stocks] ),
+    FILTER (
+        ALL ( 'WASDE Daily'),
+        'WASDE Daily'[Month] = EARLIER ( 'WASDE Daily'[Month] ) &&
+        YEAR ( 'WASDE Daily'[Date] ) >= YEAR ( EARLIER ( 'WASDE Daily'[Date] ) ) - 4 &&
+        YEAR ( 'WASDE Daily'[Date] ) <= YEAR ( EARLIER ( 'WASDE Daily'[Date]) )
+    ),
+    ALLEXCEPT ( 'WASDE Daily','WASDE Daily'[Month] )
+)
+
+z score US ES = 
+VAR Numerator   = 'WASDE Daily'[US Ending Stocks] - 'WASDE Daily'[Month Average US ES 5Y]
+VAR Denominator = 'WASDE Daily'[Month St Dev US ES 5Y]
+
+RETURN
+    IF(
+        OR( ISBLANK(Denominator), Denominator = 0 ),
+        0,
+        IFERROR( Numerator / Denominator, 0 )
+    )
+
+
+

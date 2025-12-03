@@ -1,0 +1,56 @@
+dataset <- na.omit(dataset)
+names(dataset) <- trimws(names(dataset))
+
+  library(sandwich)
+  library(lmtest)
+  library(broom)
+  library(gridExtra)
+  library(grid)
+  
+  dependent <- "z score"                                 
+  predictors <- setdiff(names(dataset), dependent)       
+  
+  if (length(predictors) == 0) {
+    plot.new(); text(0.5, 0.5, "No predictors found", cex = 2)
+  } else {
+    
+    dep   <- paste0("`", dependent, "`")
+    preds <- paste0("`", predictors, "`", collapse = " + ")
+    
+    formula <- as.formula(paste(dep, "~", preds))
+    
+    model    <- lm(formula, data = dataset)
+    model_nw <- coeftest(model, vcov = NeweyWest(model, lag = 5))
+    
+    tbl <- tidy(model_nw)
+    tbl$term <- ifelse(tbl$term == "(Intercept)", "const",
+                       sub("`","", tbl$term))   # clean name 
+    
+    # Format numbers as character 
+    tbl$estimate  <- sprintf("%.5f", round(tbl$estimate, 5))
+    tbl$std.error <- sprintf("%.5f", round(tbl$std.error, 5))
+    tbl$statistic <- sprintf("%.3f", round(tbl$statistic, 3))
+    tbl$p.value   <- sprintf("%.4f", round(tbl$p.value, 4))
+    
+    # rows 
+    coef_rows <- as.matrix(tbl[, c("term", "estimate", "std.error", "statistic", "p.value")])
+    
+    summary_rows <- rbind(
+        c("R-squared", sprintf("%.5f", summary(model)$r.squared), "", "", ""),
+      c("Adj. R-squared", sprintf("%.5f", summary(model)$adj.r.squared), "", "", ""),
+      c("Observations",   as.character(nrow(dataset)),                     "", "", "")
+    )
+    
+    final_matrix <- rbind(
+      c("Variable", "Coefficient", "Std Error", "t-stat", "p-value"),
+      coef_rows,
+      summary_rows
+    )
+    
+    grid.newpage()
+    grid.table(final_matrix, rows = NULL,
+               theme = ttheme_minimal(
+                 core    = list(fg_params = list(fontsize = 25)),
+                 colhead = list(fg_params = list(fontsize = 27, fontface = "bold"))
+               ))
+  }
