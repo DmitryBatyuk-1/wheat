@@ -1,6 +1,6 @@
 # Overview
 
-In this project, I will demonstrate data preparation and aggregation methods, together with data analysis, on the example of wheat futures data. I will use Power BI charts, as well as Python and R visuals, for a more in-depth analysis. 
+In this project, I will demonstrate data preparation and aggregation methods, together with data analysis, on the example of wheat futures data. I will use Power BI charts, as well as Python and R visuals, for a more in-depth analysis. [PowerBI Report Link](https://app.powerbi.com/reportEmbed?reportId=5e7c090c-2fc4-4bc7-be03-0c3bc24106c3&autoAuth=true&ctid=80f21a0b-c2f5-4593-a920-391b9cb2e666)
 ## Data was used from these sources: 
 - WASDE Reports https://esmis.nal.usda.gov/publication/world-agricultural-supply-and-demand-estimates#release-items
 - Commitments of Traders Reports https://www.cftc.gov/MarketReports/CommitmentsofTraders/index.htm
