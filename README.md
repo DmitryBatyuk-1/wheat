@@ -40,13 +40,20 @@ We create a calendar table and merge a copy of it with each weekly fact table. A
 
 
 # Variable preparation
-We have already measured correlations of raw variables with the Net Commercial position. One of the problems of using raw data is the potential non-stationarity of the time series. We will transform variables of interest into z-scores that will be calculated taking a five-year rolling average. After the transformation, the relationship still exists. We will proceed with our analysis. (1.4 correlation summary z-score) 
+We have already measured correlations of raw variables with the Net Commercial position. One of the problems of using raw data is the potential non-stationarity of the time series. We will transform variables of interest into z-scores that will be calculated taking a five-year rolling average. ( 3. [WASDE](https://github.com/DmitryBatyuk-1/wheat/blob/589a5f6645c34dda07af8f169c29fae473510a94/3.%20WASDE%20DAX))
+
+<img width="683" height="576" alt="1 4 correlation Summary Z score" src="https://github.com/user-attachments/assets/8a5668a8-24b6-43ab-8693-87598d830744" />
+
+After the transformation, the relationship still exists. We will proceed with our analysis.
 
 # Modeling
-We will run OLS, including the Newey-West estimator with five lags, so our standard errors are more reliable.(5. OLS) The model will fit our values, and the residuals that deviate more than one sigma (adjustable threshold) will indicate unusually high or low positioning, which will serve as a potential indicator that the Net Commercial position is about to reach its peak. 
+We will run OLS, including the Newey-West estimator with five lags, so our standard errors are more reliable.(4. [Model](https://github.com/DmitryBatyuk-1/wheat/blob/589a5f6645c34dda07af8f169c29fae473510a94/4.%20Model%20R)) 
+<img width="696" height="381" alt="4  OLS" src="https://github.com/user-attachments/assets/4a77a8b3-c991-428b-95f0-a208cdbf7355" />
 
-Our standard errors are most likely overly “optimistic” due to potential autocorrelation; however, R-squared and coefficients are still meaningful. 
+The model will fit our values, and the residuals that deviate more than one sigma (adjustable threshold) will indicate unusually high or low positioning, which will serve as a potential indicator that the Net Commercial position is about to reach its peak.Our standard errors are most likely overly “optimistic” due to potential autocorrelation; however, R-squared and coefficients are still meaningful. 
+<img width="1060" height="555" alt="4  Residuals" src="https://github.com/user-attachments/assets/f02bc6dd-f787-45bd-939d-8dc52fa6f3ad" />
+<img width="1060" height="572" alt="4  Signal" src="https://github.com/user-attachments/assets/e34810fa-b2e5-4168-8af8-a170718b9f7f" />
 
 
 # Results
-If we plot our residuals, we can see points in time where the positioning was very extreme. The bigger the deviation, the stronger the signal. (5. Residuals and Signal)
+If we plot our residuals, we can see points in time where the positioning was very extreme. The bigger the deviation, the stronger the signal.
