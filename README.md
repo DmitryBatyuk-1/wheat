@@ -26,6 +26,9 @@ Our data exhibits significant month-to-month seasonality. A more meaningful comp
 <img width="755" height="623" alt="1 4 correlation WASDE US" src="https://github.com/user-attachments/assets/658228aa-7e58-4256-8377-15a9b5da6c13" />
 <img width="683" height="565" alt="1 4 correlation Summary" src="https://github.com/user-attachments/assets/97b8a35b-6268-402c-b1f8-507939fb7279" />
 
+The final correlation table provides a summary of variables that exhibit potentially strong relationships across various aspects of commercial hedging behavior, including factors such as weather (HDD, CDD), supply and demand imbalances (ending stocks and total use), and accumulated exports as a leading indicator of demand. Additionally, our model will incorporate expectations regarding input prices (crude oil spreads) and the macro-level competitiveness of exports, represented by the Trade Weighted US Dollar Index.
+
+
 
 
 # Data Preparation and structure
